@@ -16,9 +16,6 @@ const Text = require('./Text.js')
 
 app.use(express.static(path.join(__dirname, '../public')))
 
-app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, '../public/index.html'))
-})
 
 let clients = []
 let texts = []
@@ -61,6 +58,16 @@ io.on('connection', (client) => {
 		clients.pop(client)
 		io.emit('synchronized-user', clients.length)
 	})
+})
+
+app.get('/', (req, res) => {
+	res.sendFile(path.join(__dirname, '../public/index.html'))
+})
+
+app.post('/create_session', (req, res) => {
+	const session_hash = crypto.createHash('md5').update(Date.now().toString()).digest('hex')
+	console.log(session_hash)
+	res.status(200).send({ success: 'ok', session_hash })
 })
 
 server.listen(port, () => {

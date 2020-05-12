@@ -4,6 +4,7 @@
 
 * {
 	--main-white-color: #fff;
+	--main-grey-clear-color: #aaa;
 	--main-grey-color: #888;
 	--main-green-color: #39c362;
 }
@@ -73,6 +74,29 @@ header > p {
 
 .info {
 	color: var(--main-white-color);
+}
+
+/* ================================== SESSION CREATION BOX */
+/* ============ */
+/* === */
+
+#create-a-session-block {
+	width: 200px;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#create-a-session-button {
+	border: none;
+	padding: 5px 10px;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.459);
+	transition: background-color 0.4s;
+}
+
+#create-a-session-button:hover {
+	background-color: var(--main-white-color);
 }
 
 /* ================================== TEXTAREA */
@@ -151,8 +175,9 @@ header > p {
 	user-select: none;
 }
 
-
-
+.scroll-hidden::-webkit-scrollbar {
+	display: none;
+}
 
 .Center {
 
