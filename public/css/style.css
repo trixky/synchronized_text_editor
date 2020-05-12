@@ -1,0 +1,186 @@
+/* ================================== VARIABLES */
+/* ============ */
+/* === */
+
+* {
+	--main-white-color: #fff;
+	--main-grey-color: #888;
+	--main-green-color: #39c362;
+}
+
+body, html {
+	background-color: rgb(36, 36, 36) !important;
+}
+
+* {
+	font-family: 'Baloo Tamma 2', cursive;
+}
+
+h1 {
+	color: var(--main-white-color);
+	font-size: 50px;
+}
+
+p {
+	font-size: 20px;
+}
+
+/* ================================== BLACK - BOX */
+/* ============ */
+/* === */
+
+.black-box {
+	color: var(--main-grey-color);
+	width: 350px;
+	padding: 20px;
+	padding-bottom: 5px;
+	text-align: center;
+	box-shadow: 0 0 8px #000;
+}
+
+
+.centered-block {
+	display: block;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	background: rgb(13, 13, 13);
+}
+
+/* ================================== HEADER */
+/* ============ */
+/* === */
+
+header > p {
+	color: var(--main-grey-color);
+}
+
+.Cap-Color {
+	color: var(--main-white-color);
+}
+
+/* ================================== SESSION - INFO */
+/* ============ */
+/* === */
+
+.session-info {
+	width: 500px;
+}
+
+.variable-info {
+	color: var(--main-green-color);
+}
+
+.info {
+	color: var(--main-white-color);
+}
+
+/* ================================== TEXTAREA */
+/* ============ */
+/* === */
+
+#textarea {
+	color: var(--main-white-color);
+	border: none;
+
+	width: 600px;
+	height: 300px;
+
+	padding: 15px;
+	resize: none;
+
+	outline: none;
+	font-size: 20px;
+	box-shadow: 0 0 8px #000;
+	caret-color: var(--main-green-color);;
+}
+
+#textarea::-webkit-input-placeholder { /* Chrome */
+	color: var(--main-grey-color);
+}
+
+#textarea:-ms-input-placeholder { /* IE 10+ */
+	color: var(--main-grey-color);
+}
+
+#textarea::-moz-placeholder { /* Firefox 19+ */
+	color: var(--main-grey-color);
+	opacity: 1;
+}
+
+#textarea:-moz-placeholder { /* Firefox 4 - 18 */
+	color: var(--main-grey-color);
+	opacity: 1;
+}
+
+
+/* ================================== GITHUB */
+/* ============ */
+/* === */
+
+#gitbub-box {
+	margin-left: auto;
+	margin-right: auto;
+	width: 65px;
+}
+
+#github-logo-icon {
+	width: 50px;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 30px;
+	transition: transform 0.4s;
+}
+
+#github-logo-icon:hover {
+	transform: scale(1.1);
+	cursor: grab;
+}
+
+/* ================================== OPTIONS */
+/* ============ */
+/* === */
+
+.noselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+
+
+.Center {
+
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+
+	background: linear-gradient(139deg, #398bc3, #c372bc, #d5b13e);
+	background-size: 600% 600%;
+
+	-webkit-animation: AnimationName 60s ease infinite;
+	-moz-animation: AnimationName 60s ease infinite;
+	animation: AnimationName 60s ease infinite;
+
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:28% 0%}
+    50%{background-position:73% 100%}
+    100%{background-position:28% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:28% 0%}
+    50%{background-position:73% 100%}
+    100%{background-position:28% 0%}
+}
+@keyframes AnimationName {
+    0%{background-position:28% 0%}
+    50%{background-position:73% 100%}
+    100%{background-position:28% 0%}
+}
