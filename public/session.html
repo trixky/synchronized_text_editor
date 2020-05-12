@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Synchronized Text Editor</title>
+
+	<link rel="icon" type="image/png" href="/favicon/favicon.ico" />
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+	<div class="Center">
+
+		<header class="black-box centered-block">
+			<h1 class="noselect">STE</h1>
+			<p class="noselect">for <span class="Cap-Color">S</span>ynchronized <span class="Cap-Color">T</span>ext
+				<span class="Cap-Color">E</span>ditor</p>
+		</header>
+
+		<textarea type="textarea" id="textarea" class="centered-block" placeholder="Write your text here..."
+			spellcheck="false"></textarea>
+
+		<div class="session-info black-box centered-block noselect">
+			<p class="info">[ <span id="synchronized-user" class="variable-info">12</span> ] synchronized user</p>
+			<p class="info">[ <span id="text-hash" class="variable-info">af7ad67f7sdyo2346</span> ] text hash</p>
+		</div>
+
+		<div id="gitbub-box">
+			<a href="https://github.com/trixky" target="_blank">
+				<img id="github-logo-icon" class="noselect" src="https://www.clever-cloud.com/images/home/github-icon.svg"
+				alt="github logo">
+			</a>
+		</div>
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/js/socket.js"></script>
+</body>
+
+</html>
