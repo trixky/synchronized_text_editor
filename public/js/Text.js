@@ -10,11 +10,6 @@ function Text() {
 		content: ''
 	}
 	this.init = {
-		from_scratch: () => {
-			_this.content = 'a enlever'; // ------------ a enlever
-			_this.id = '118b537e'
-			return _this
-		},
 		from_fresh_update: (data, TOP_text) => {
 			_this.id = data.id
 			_this.last_id = data.last_id;
@@ -35,4 +30,4 @@ function Text() {
 	}
 }
 
-module.exports = Text
+export { Text };
