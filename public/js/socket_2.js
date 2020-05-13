@@ -20,7 +20,7 @@ const textarea = {
 		
 		for (; first < len_last && first < len_new; first++) {
 			if (last_content[first] != area.value[first]) {
-				for (; last_last >= 0 && last_new >= 0 && last_last > first; last_last-- , last_new--) {
+				for (; last_last >= 0 && last_new >= 0 && last_last > first && last_new > first; last_last-- , last_new--) {
 					if (last_content[last_last] != area.value[last_new]) {
 						console.log('different', last_content[last_last], area.value[last_new])
 						console.log('different', last_last, last_new)
