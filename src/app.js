@@ -28,16 +28,15 @@ io.on('connection', (socket) => {
 	console.log('new connection ...')
 
 	socket.on('ask-full-text', (data, callback) => {
-		console.log(texts[0])
-		callback(texts[texts.length - 1].format.full())
+		const last_text = texts[texts.length - 1]
+		callback(last_text.format.full())
 	})
 
 	socket.on('update-text', (data) => {
 		console.log(data)
 		const last_text = texts[texts.length - 1]
 		if (data.last_id === last_text.id) {
-			const new_text = data
-			new_text.content = [last_text.content.slice(0, data.FLC_update.first), data.FLC_update.content, last_text.content.slice(data.FLC_update.last)].join('')
+			const new_text = new Text().init.from_fresh_update(data, last_text)
 			texts.push(new_text)
 			socket.broadcast.emit('update-text', data)
 		}
