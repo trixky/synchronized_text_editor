@@ -33,12 +33,15 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('update-text', (data) => {
-		console.log(data)
+		// console.log(data)
 		const last_text = texts[texts.length - 1]
 		if (data.last_id === last_text.id) {
+			console.log('---- success')
 			const new_text = new Text().init.from_fresh_update(data, last_text)
 			texts.push(new_text)
 			socket.broadcast.emit('update-text', data)
+		} else {
+			console.log('----------------------- error')
 		}
 	})
 })
