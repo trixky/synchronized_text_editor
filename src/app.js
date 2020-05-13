@@ -22,7 +22,7 @@ let texts = []
 
 texts.push(new Text())
 
-const last_text = function (texts) {
+const last_text = (texts) => {
 	const len = texts.length
 	let last_text_finded = texts[0]
 
@@ -34,6 +34,28 @@ const last_text = function (texts) {
 	return (last_text_finded)
 }
 
+const find_text_by_hash = (texts, hash) => {
+	const len = texts.length
+
+	for (let i = 0; i < len; i++) {
+		if (texts[i].hash == hash) {
+			return text[i]
+		}
+	}
+	return undefined
+}
+
+const is_the_same_client = (texts, last_text_finded, modification) => {
+	let temp_text = last_text_finded
+	while (temp_text != undefined && temp_text.author_id === modification.author_id) {
+		if (temp_text.hash = modification.hash) {
+			return true
+		}
+		temp_text = find_text_by_hash(texts, temp_text.last_hash)
+	}
+	return (false)
+}
+
 io.on('connection', (client) => {
 	clients.push(client)
 	client.emit('update-text', last_text(texts).format.replace())
@@ -41,7 +63,7 @@ io.on('connection', (client) => {
 
 	client.on('update-text', (data) => {
 		const last_text_finded = last_text(texts)
-		if (data.hash === last_text_finded.hash) {
+		if (data.hash === last_text_finded.hash || is_the_same_client(texts, last_text_finded, data)) {
 			const new_text = new Text(last_text_finded, data)
 			texts.push(new_text)
 			io.emit('update-text', new_text.format.update());
