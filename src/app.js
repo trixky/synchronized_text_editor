@@ -39,7 +39,7 @@ const find_text_by_hash = (texts, hash) => {
 
 	for (let i = 0; i < len; i++) {
 		if (texts[i].hash == hash) {
-			return text[i]
+			return texts[i]
 		}
 	}
 	return undefined
