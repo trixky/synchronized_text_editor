@@ -46,19 +46,25 @@ io.on('connection', (socket) => {
 		callback(last_text.format.full())
 	})
 
-	socket.on('update-text', (data) => {
+	socket.on('update-text', async (data) => {
+		console.log('\n\n\n\n\n')
 		const last_text = texts[texts.length - 1]
 		const old_text = find_text_by_id(texts, data.last_id)
 		if (old_text == undefined) {
 			return;
 		}
-		const new_text = new Text().init.from_old_update(data, old_text, last_text)
+		console.log(')))) on donne start')
+		console.log(old_text.content)
+		console.log(last_text.content)
+		console.log(')))) on donne end')
+		const new_text = new Text().init.from_old_update(data, old_text, last_text, socket.id)
 		if (new_text == undefined) {
 			return;
 		}
 		new_text.last_id = last_text.id
 		texts.push(new_text)
 		const update_to_emit = new_text.format.update()
+		await sleep(3000)
 		socket.emit('update-text', update_to_emit)
 		socket.broadcast.emit('update-text', update_to_emit)
 	})
