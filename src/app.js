@@ -64,7 +64,7 @@ io.on('connection', (socket) => {
 		new_text.last_id = last_text.id
 		texts.push(new_text)
 		const update_to_emit = new_text.format.update()
-		await sleep(3000)
+		// await sleep(3000)
 		socket.emit('update-text', update_to_emit)
 		socket.broadcast.emit('update-text', update_to_emit)
 	})
