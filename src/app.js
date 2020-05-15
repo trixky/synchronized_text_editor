@@ -11,18 +11,35 @@ const server = http.createServer(app)
 const socketio = require('socket.io')
 const io = socketio(server)
 
-// const crypto = require('crypto')
 const Text = require('./Text.js')
 
 app.use(express.static(path.join(__dirname, '../public')))
 
 // ============================================================
 
+const sleep = (ms) => {
+	return new Promise((resolve, refect) => {
+		setTimeout(() => {
+			resolve('sleep' + ms.toString())
+		}, ms)
+	})
+}
+
+// ============================================================
+
+const find_text_by_id = (texts, id) => {
+	len = texts.length
+	for (let i = 0; i < len; i++) {
+		if (texts[i].id === id) {
+			return texts[i]
+		}
+	}
+	return undefined
+}
+
 let texts = []
 const first_text = new Text().init.from_scratch();
 texts.push(first_text)
-
-console.log(texts[0])
 
 io.on('connection', (socket) => {
 	console.log('new connection ...')
@@ -32,16 +49,47 @@ io.on('connection', (socket) => {
 		callback(last_text.format.full())
 	})
 
-	socket.on('update-text', (data) => {
-		// console.log(data)
+	socket.on('ask-last-update-clone', async (data) => {
+		console.log('toupituo')
 		const last_text = texts[texts.length - 1]
-		if (data.last_id === last_text.id) {
-			console.log('---- success')
-			const new_text = new Text().init.from_fresh_update(data, last_text)
+		const new_text = new Text().init.from_fresh_update({
+			id: Math.random().toString(),
+			FLC_update: {
+				first: 0,
+				second: 0,
+				content: ''
+			}
+		}, last_text)
+		texts.push(new_text)
+		const update_to_emit = new_text.format.update()
+		await sleep(2000)
+		socket.emit('update-text-clone', update_to_emit)
+		socket.broadcast.emit('update-text-clone', update_to_emit)
+	})
+	
+
+	socket.on('update-text', async (data) => {
+		const last_text = texts[texts.length - 1]
+		if (data.last_id === last_text.id && false) {
+			new_text.init.from_fresh_update(data, last_text)
 			texts.push(new_text)
 			socket.broadcast.emit('update-text', data)
 		} else {
-			console.log('----------------------- error')
+			const old_text = find_text_by_id(texts, data.last_id)
+			if (old_text == undefined) {
+				return;
+			}
+			const new_text = new Text().init.from_old_update(data, old_text, last_text)
+			if (new_text == undefined) {
+				socket.emit('come-back', last_text.format.full())
+				return;
+			}
+			new_text.last_id = last_text.id
+			texts.push(new_text)
+			const update_to_emit = new_text.format.update()
+			await sleep(2000)
+			socket.emit('update-text', update_to_emit)
+			socket.broadcast.emit('update-text', update_to_emit)
 		}
 	})
 })
