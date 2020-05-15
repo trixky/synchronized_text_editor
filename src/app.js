@@ -62,7 +62,7 @@ io.on('connection', (socket) => {
 		}, last_text)
 		texts.push(new_text)
 		const update_to_emit = new_text.format.update()
-		await sleep(2000)
+		// await sleep(2000)
 		socket.emit('update-text-clone', update_to_emit)
 		socket.broadcast.emit('update-text-clone', update_to_emit)
 	})
@@ -87,7 +87,7 @@ io.on('connection', (socket) => {
 			new_text.last_id = last_text.id
 			texts.push(new_text)
 			const update_to_emit = new_text.format.update()
-			await sleep(2000)
+			// await sleep(2000)
 			socket.emit('update-text', update_to_emit)
 			socket.broadcast.emit('update-text', update_to_emit)
 		}
