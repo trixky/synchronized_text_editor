@@ -34,15 +34,19 @@ const find_text_by_id = (texts, id) => {
 }
 
 let texts = [new Text().init.from_scratch()]
+let sockets_number = 0;
 
 io.on('connection', (socket) => {
-
+	sockets_number++
+	socket.broadcast.emit('synchronized-user', sockets_number)
+	socket.emit('synchronized-user', sockets_number)
+	
 	socket.on('ask-full-text', (data, callback) => {
 		const last_text = texts[texts.length - 1]
 		callback(last_text.format.full())
 	})
 
-	socket.on('update-text', async (data) => {
+	socket.on('update-text', (data) => {
 		const last_text = texts[texts.length - 1]
 		const old_text = find_text_by_id(texts, data.last_id)
 		if (old_text == undefined) {
@@ -57,6 +61,11 @@ io.on('connection', (socket) => {
 		const update_to_emit = new_text.format.update()
 		socket.emit('update-text', update_to_emit)
 		socket.broadcast.emit('update-text', update_to_emit)
+	})
+	
+	socket.on('disconnect', () => {
+		sockets_number--
+		socket.broadcast.emit('synchronized-user', sockets_number)
 	})
 })
 

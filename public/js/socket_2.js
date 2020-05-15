@@ -1,7 +1,7 @@
 const area = document.querySelector('textarea');
 const socket = io()
 
-const hash_string = s => s.split('').reduce((a, b) => { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0).toString(16)
+const hash_string = s => Math.abs(s.split('').reduce((a, b) => { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0)).toString(16)
 
 let texts = []
 
@@ -57,6 +57,7 @@ const textarea = {
 			last_id: new_text.last_id,
 			FLC_update: new_text.FLC_update
 		}
+		$('#text-hash').text(update.id)
 		socket.emit('update-text', update)
 	}
 }
@@ -85,6 +86,7 @@ socket.on('update-text', (data) => {
 		texts.push(data)
 		const actual_cursor_position = $('#textarea').prop("selectionStart");
 		$('#textarea').val(data.content)
+		$('#text-hash').text(data.id)
 		if (actual_cursor_position < data.FLC_update.first) {
 			$('#textarea').prop('selectionEnd', actual_cursor_position);
 		} else if (actual_cursor_position >= data.FLC_update.last) {
@@ -96,4 +98,8 @@ socket.on('update-text', (data) => {
 	} else {
 		texts[double_id] = data
 	}
+})
+
+socket.on('synchronized-user', (data) => {
+	$('#synchronized-user').text(data)
 })
