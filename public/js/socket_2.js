@@ -78,28 +78,21 @@ if (area.addEventListener) {
 
 socket.on('update-text', (data) => {
 	const data_text = texts.find(text => text.id === data.last_id)
-
 	data.content = [data_text.content.slice(0, data.FLC_update.first), data.FLC_update.content, data_text.content.slice(data.FLC_update.last)].join('')
 	const double_id = texts.findIndex(text => text.id === data.id)
 
 	if (double_id < 0) {
 		texts.push(data)
+		const actual_cursor_position = $('#textarea').prop("selectionStart");
 		$('#textarea').val(data.content)
-	} else {
-		texts[double_id] = data
-		// socket.emit('ask-last-update-clone', {})
-	}
-})
-
-socket.on('update-text-clone', (data) => {
-	const data_text = texts.find(text => text.id === data.last_id)
-
-	data.content = [data_text.content.slice(0, data.FLC_update.first), data.FLC_update.content, data_text.content.slice(data.FLC_update.last)].join('')
-	const double_id = texts.findIndex(text => text.id === data.id)
-
-	if (double_id < 0) {
-		texts.push(data)
-		$('#textarea').val(data.content)
+		if (actual_cursor_position < data.FLC_update.first) {
+			$('#textarea').prop('selectionEnd', actual_cursor_position);
+		} else if (actual_cursor_position >= data.FLC_update.last) {
+			$('#textarea').prop('selectionEnd', actual_cursor_position - (data.FLC_update.last - data.FLC_update.first) + data.FLC_update.content.length);
+		} else {
+			$('#textarea').prop('selectionEnd', data.FLC_update.first + data.FLC_update.content.length);
+			console.log('okok last = ', data.FLC_update.first + data.FLC_update.content.length)
+		}
 	} else {
 		texts[double_id] = data
 	}

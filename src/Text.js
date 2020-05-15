@@ -11,7 +11,6 @@ function Text() {
 	}
 	this.init = {
 		from_scratch: () => {
-			_this.content = 'a enlever'; // ------------ a enlever
 			_this.id = '118b537e'
 			return _this
 		},
@@ -54,6 +53,7 @@ function Text() {
 			}
 		}
 	}
+
 	this.format = {
 			full: () => {
 				return {
