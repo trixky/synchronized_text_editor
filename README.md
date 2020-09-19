@@ -6,11 +6,11 @@ A little synchronized text editor on [node.js](https://nodejs.org/) with [socket
 
 *this project is in progress*
 
-## Usage
-
-### Online
+## Online
 
 This project is online thanks to the [Heroku](https://dashboard.heroku.com/) service, so you can visit it by clicking [here](https://limitless-dawn-53146.herokuapp.com/)!
+
+## Usage
 
 ### Requirements
 
